@@ -1,0 +1,7 @@
+Django==2.2
+mysql-connector-python==8.0.19
+mysqlclient==1.4.6
+PyMySQL==0.9.3
+pytz==2019.1
+sqlparse==0.3.0
+virtualenv==16.5.0

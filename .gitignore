@@ -1,5 +1,7 @@
 /venv/
-/migrations/
+competitions/migrations/
 db.sqlite3
 .idea/
-/__pycache__/
+competitions/__pycache__/
+=2.2.10
+swim_adm_backend/__pycache__/

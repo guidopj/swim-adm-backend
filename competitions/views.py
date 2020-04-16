@@ -2,27 +2,33 @@ from .models import Competition
 from django.contrib import messages
 from .forms import CompetitionForm
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
 def getCompetitions(request):
     return Competition.objects.all()
 
+@csrf_exempt
 def saveCompetition(request):
+    messages.success(request, request.POST)
     if request.method == "POST":
         form = CompetitionForm(request.POST)
         if form.is_valid():
             competition = form.save(commit=False)
             value = competition.save()
-            messages.error(request, value)
-            return HttpResponse(status_code=200)
+            messages.success(request, value)
+            return HttpResponse(status=200)
+        else:
+            messages.error(request, form.errors)
+            return HttpResponse(status=500, content=form.errors)
     else:
-        return HttpResponse(status_code=405)
+        return HttpResponse(status=405)
 
 def deleteCompetition(request, competitionId):
    comp = Competition.objects.get(id = competitionId)
    comp.delete()
-   return HttpResponse(status_code=200)
+   return HttpResponse(status=200)
 
 def editCompetition(request):
     if request.method == "PUT":
@@ -39,7 +45,7 @@ def editCompetition(request):
             comp.number_of_lanes = request.PUT.get('number_of_lanes')
             comp.pool_meters = request.PUT.get('pool_meters')
             comp.save()
-            return HttpResponse('updated', status_code=200)
+            return HttpResponse('updated', status=200)
         else:
             return HttpResponse('ERROR', status_code=500)
     else:

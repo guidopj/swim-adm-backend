@@ -36,6 +36,8 @@ CORS_ORIGIN_WHITELIST = [
 
 INSTALLED_APPS = [
     'competitions',
+    'teams',
+    'athletes',
     'django.contrib.admin',
     'corsheaders',
     'django.contrib.auth',

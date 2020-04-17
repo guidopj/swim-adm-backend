@@ -23,8 +23,7 @@ def saveCompetition(request):
         form = CompetitionForm(received_json_data)
         if form.is_valid():
             competition = form.save(commit=False)
-            value = competition.save()
-            messages.success(request, value)
+            competition.save()
             return HttpResponse(status=200)
         else:
             context = {'errors': form.errors}

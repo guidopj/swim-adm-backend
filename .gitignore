@@ -2,6 +2,5 @@
 competitions/migrations/
 db.sqlite3
 .idea/
-competitions/__pycache__/
+*/__pycache__/*
 =2.2.10
-swim_adm_backend/__pycache__/

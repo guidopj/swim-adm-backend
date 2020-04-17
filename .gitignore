@@ -3,4 +3,5 @@ competitions/migrations/
 db.sqlite3
 .idea/
 */__pycache__/*
+*/migrations/*
 =2.2.10

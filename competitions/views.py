@@ -3,6 +3,11 @@ from django.contrib import messages
 from .forms import CompetitionForm
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
+import logging
+logger = logging.getLogger(__name__)
+from datetime import date
+from datetime import datetime
 
 # Create your views here.
 
@@ -11,17 +16,19 @@ def getCompetitions(request):
 
 @csrf_exempt
 def saveCompetition(request):
-    messages.success(request, request.POST)
     if request.method == "POST":
-        form = CompetitionForm(request.POST)
+        data = request.body.decode('utf-8')
+        received_json_data = json.loads(data)
+        logger.error(received_json_data)
+        form = CompetitionForm(received_json_data)
         if form.is_valid():
             competition = form.save(commit=False)
             value = competition.save()
             messages.success(request, value)
             return HttpResponse(status=200)
         else:
-            messages.error(request, form.errors)
-            return HttpResponse(status=500, content=form.errors)
+            context = {'errors': form.errors}
+            return HttpResponse("ERROR: " + str(context), status=500)
     else:
         return HttpResponse(status=405)
 
@@ -47,6 +54,7 @@ def editCompetition(request):
             comp.save()
             return HttpResponse('updated', status=200)
         else:
-            return HttpResponse('ERROR', status_code=500)
+            context = {'errors': form.errors}
+            return HttpResponse("ERROR: " + str(context))
     else:
         return HttpResponse(status_code=405)

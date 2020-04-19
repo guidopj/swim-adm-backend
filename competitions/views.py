@@ -1,18 +1,19 @@
 from .models import Competition
-from django.contrib import messages
+from django.core import serializers
+from django.http import JsonResponse
 from .forms import CompetitionForm
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
 logger = logging.getLogger(__name__)
-from datetime import date
-from datetime import datetime
 
 # Create your views here.
 
 def getCompetitions(request):
-    return Competition.objects.all()
+    qs = Competition.objects.all()
+    data = list(qs.values())
+    return JsonResponse(data, safe=False)
 
 @csrf_exempt
 def saveCompetition(request):

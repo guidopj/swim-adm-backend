@@ -4,7 +4,8 @@ from .models import Competition
 class CompetitionForm(forms.ModelForm):
     class Meta:
         model = Competition
-        fields = ['club_name',
+        fields = ['competition_name',
+                  'club_name',
                   'competition_start_date',
                   'competition_end_date',
                   'start_time',

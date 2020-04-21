@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Competition(models.Model):
-    competition_name = models.CharField(max_length=200, default='New Competition ' + str(id), primary_key=True)
+    competition_name = models.CharField(max_length=200, primary_key=True)
     club_name = models.CharField(max_length=200)
     competition_start_date = models.DateField(default=timezone.localdate)
     competition_end_date = models.DateField(default=timezone.localdate)

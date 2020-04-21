@@ -4,6 +4,8 @@ import json
 import logging
 from .forms import TeamForm
 from django.http import HttpResponse
+from .models import Team
+from django.http import JsonResponse
 
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -24,3 +26,8 @@ def saveTeam(request):
             return HttpResponse("ERROR: " + str(context), status=500)
     else:
         return HttpResponse(status=405)
+
+def getTeams(request):
+    qs = Team.objects.all()
+    data = list(qs.values())
+    return JsonResponse(data, safe=False)

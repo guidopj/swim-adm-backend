@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 CORS_ORIGIN_WHITELIST = [
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'competitions',
     'teams',
     'athletes',
+    'events',
+    'event_executions',
     'django.contrib.admin',
     'corsheaders',
     'django.contrib.auth',
@@ -131,3 +134,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CSRF_COOKIE_DOMAIN=None

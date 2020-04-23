@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
 logger = logging.getLogger(__name__)
+from events.models import Event
+from django.core.serializers import serialize
 
 # Create your views here.
 
@@ -14,6 +16,15 @@ def getCompetitions(request):
     qs = Competition.objects.all()
     data = list(qs.values())
     return JsonResponse(data, safe=False)
+
+def getCompetitionDetails(request, competition_name):
+    competition = Competition.objects.get(competition_name=competition_name)
+    events = Event.objects.filter(competition_id=competition_name).values()
+    logger.error(events)
+    teams = competition.teams.all()
+    eventsSerialized = serializers.serialize("json", events)
+    teamsSerialized = serializers.serialize("json", teams)
+    return JsonResponse({'events':eventsSerialized, 'teams': teamsSerialized}, safe=False)
 
 @csrf_exempt
 def saveCompetition(request):

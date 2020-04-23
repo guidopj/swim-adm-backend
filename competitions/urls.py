@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.getCompetitions, name="getCompetitions"),
+    path('<str:competition_name>', views.getCompetitionDetails, name="getCompetitionDetails"),
     path('create', views.saveCompetition, name="saveCompetition"),
     path('editCompetition', views.editCompetition, name="editCompetition"),
-    path('deleteCompetition/<id>/', views.deleteCompetition, name="deleteCompetition"),
+    path('deleteCompetition/<id>', views.deleteCompetition, name="deleteCompetition"),
 ]

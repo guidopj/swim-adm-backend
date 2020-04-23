@@ -13,4 +13,5 @@ class CompetitionForm(forms.ModelForm):
                   'inscription_end_date',
                   'number_of_lanes',
                   'pool_meters',
+                  'teams'
                   ]

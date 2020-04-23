@@ -5,6 +5,7 @@ import logging
 from .forms import TeamForm
 from django.http import HttpResponse
 from .models import Team
+from competitions.models import Competition
 from django.http import JsonResponse
 
 logger = logging.getLogger(__name__)
@@ -18,8 +19,11 @@ def saveTeam(request):
         logger.error(received_json_data)
         form = TeamForm(received_json_data)
         if form.is_valid():
+            competition = Competition.objects.get(competition_name=received_json_data.competition_name)
             team = form.save(commit=False)
+            competition.teams.add(team)
             team.save()
+            competition.save()
             return HttpResponse(status=200)
         else:
             context = {'errors': form.errors}

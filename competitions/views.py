@@ -9,6 +9,9 @@ import logging
 logger = logging.getLogger(__name__)
 from events.models import Event
 from django.core.serializers import serialize
+from teams.models import Team
+from athletes.models import Athlete
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -18,13 +21,15 @@ def getCompetitions(request):
     return JsonResponse(data, safe=False)
 
 def getCompetitionDetails(request, competition_name):
-    competition = Competition.objects.get(competition_name=competition_name)
-    events = Event.objects.filter(competition_id=competition_name).values()
-    logger.error(events)
-    teams = competition.teams.all()
+    events = Event.objects.filter(competition_name=competition_name).values()
+    teams = Team.objects.filter(competition_name=competition_name)
+    athletesList = []
+    for team in teams:
+        athletes = Athlete.objects.filter(team=team)
+        athletesList = athletesList + list(athletes.values())
     eventsSerialized = serializers.serialize("json", events)
     teamsSerialized = serializers.serialize("json", teams)
-    return JsonResponse({'events':eventsSerialized, 'teams': teamsSerialized}, safe=False)
+    return JsonResponse({'events': eventsSerialized, 'teams': teamsSerialized, 'athletes': athletesList}, safe=False)
 
 @csrf_exempt
 def saveCompetition(request):

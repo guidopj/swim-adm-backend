@@ -8,4 +8,5 @@ class TeamForm(forms.ModelForm):
                   'team_name_abbr',
                   'team_address',
                   'team_city',
+                  'competition_name',
                   ]

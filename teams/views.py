@@ -16,14 +16,13 @@ def saveTeam(request):
     if request.method == "POST":
         data = request.body.decode('utf-8')
         received_json_data = json.loads(data)
-        logger.error(received_json_data)
+        competition_name= received_json_data["competition_name"]
+        received_json_data["competition_name"] = [competition_name]
+        logger.error(received_json_data.values())
         form = TeamForm(received_json_data)
         if form.is_valid():
-            competition = Competition.objects.get(competition_name=received_json_data.competition_name)
-            team = form.save(commit=False)
-            competition.teams.add(team)
+            team = form.save(commit=True)
             team.save()
-            competition.save()
             return HttpResponse(status=200)
         else:
             context = {'errors': form.errors}

@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from teams.models import Team
 
 # Create your models here.
 
@@ -14,4 +13,3 @@ class Competition(models.Model):
     inscription_end_date= models.DateTimeField(default=timezone.now)
     number_of_lanes = models.IntegerField()
     pool_meters = models.IntegerField()
-    teams = models.ManyToManyField(Team)

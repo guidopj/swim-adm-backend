@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from athletes.models import Athlete
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -11,6 +13,11 @@ from django.http import HttpResponse
 
 logger = logging.getLogger(__name__)
 # Create your views here.
+
+def getAthletes():
+    qs = Athlete.objects.all()
+    data = list(qs.values())
+    return JsonResponse(data, safe=False)
 
 @csrf_exempt
 def saveAthlete(request):

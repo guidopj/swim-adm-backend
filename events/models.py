@@ -10,4 +10,4 @@ class Event(models.Model):
     category_to_age = models.IntegerField()
     genre = models.CharField(max_length=10)
     record = models.DurationField()
-    competition = models.ForeignKey(Competition, on_delete=models.CASCADE, default="")
+    competition_name = models.ForeignKey(Competition, on_delete=models.CASCADE, default="")

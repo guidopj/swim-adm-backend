@@ -1,15 +1,13 @@
 from django.db import models
 from athletes.models import Athlete
-from events.models import Event
+from event_inscription.models import EventInscription
 
 # Create your models here.
 
 class EventExecution(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    athlete = models.ForeignKey(Athlete, on_delete=models.CASCADE)
+    event_inscription = models.ForeignKey(EventInscription, on_delete=models.CASCADE, default="")
     heat = models.IntegerField()
     lane = models.IntegerField()
-    inscription_time = models.DurationField()
-    final_time = models.DurationField()
+    final_time = models.TimeField()
     heat_position = models.IntegerField()
     general_position = models.IntegerField()

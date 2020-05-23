@@ -23,4 +23,6 @@ urlpatterns = [
     path('login/',include('django.contrib.auth.urls')),
     path('teams/',include('teams.urls')),
     path('athletes/',include('athletes.urls')),
+    path('events/',include('events.urls')),
+    path('inscriptions/',include('event_inscription.urls')),
 ]

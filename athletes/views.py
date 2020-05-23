@@ -1,10 +1,7 @@
-from django.shortcuts import render
-from athletes.models import Athlete
-from django.http import JsonResponse
-
 # Create your views here.
 
-from django.shortcuts import render
+from athletes.models import Athlete
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import logging

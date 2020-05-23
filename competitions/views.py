@@ -1,16 +1,14 @@
 from .models import Competition
-from django.core import serializers
 from django.http import JsonResponse
 from .forms import CompetitionForm
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
 logger = logging.getLogger(__name__)
 from events.models import Event
-from django.core.serializers import serialize
 from teams.models import Team
 from athletes.models import Athlete
+from event_inscription.models import EventInscription
 from django.http import HttpResponse
 
 # Create your views here.
@@ -22,14 +20,24 @@ def getCompetitions(request):
 
 def getCompetitionDetails(request, competition_name):
     events = Event.objects.filter(competition_name=competition_name).values()
-    teams = Team.objects.filter(competition_name=competition_name)
+    teams = Team.objects.filter(competition_name=competition_name).values()
+    inscriptions = EventInscription.objects.filter(competition_name=competition_name).values()
+    eventsList = list(events)
+    teamsList = list(teams)
+    inscriptionsList = list(inscriptions)
+    logger.error(teamsList)
     athletesList = []
-    for team in teams:
-        athletes = Athlete.objects.filter(team=team)
+    for team in teamsList:
+        athletes = Athlete.objects.filter(team=team['team_name_abbr'])
         athletesList = athletesList + list(athletes.values())
-    eventsSerialized = serializers.serialize("json", events)
-    teamsSerialized = serializers.serialize("json", teams)
-    return JsonResponse({'events': eventsSerialized, 'teams': teamsSerialized, 'athletes': athletesList}, safe=False)
+    return JsonResponse(
+        {
+            'events': eventsList,
+            'teams': teamsList,
+            'athletes': athletesList,
+            'inscriptions': inscriptionsList
+        }, safe=False
+    )
 
 @csrf_exempt
 def saveCompetition(request):

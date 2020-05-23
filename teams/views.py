@@ -1,14 +1,12 @@
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+
 import json
-import logging
+
 from .forms import TeamForm
 from django.http import HttpResponse
 from .models import Team
-from competitions.models import Competition
 from django.http import JsonResponse
-
-logger = logging.getLogger(__name__)
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 @csrf_exempt
@@ -18,7 +16,6 @@ def saveTeam(request):
         received_json_data = json.loads(data)
         competition_name= received_json_data["competition_name"]
         received_json_data["competition_name"] = [competition_name]
-        logger.error(received_json_data.values())
         form = TeamForm(received_json_data)
         if form.is_valid():
             team = form.save(commit=True)

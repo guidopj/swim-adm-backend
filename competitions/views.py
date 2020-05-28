@@ -21,12 +21,16 @@ def getCompetitions(request):
 def getCompetitionDetails(request, competition_name):
     events = Event.objects.filter(competition_name=competition_name).values()
     teams = Team.objects.filter(competition_name=competition_name).values()
-    inscriptions = EventInscription.objects.filter(competition_name=competition_name).values()
+
     eventsList = list(events)
     teamsList = list(teams)
-    inscriptionsList = list(inscriptions)
-    logger.error(teamsList)
+
+    inscriptionsList = []
     athletesList = []
+
+    for event in eventsList:
+        inscriptions = EventInscription.objects.filter(id=event["id"])
+        inscriptionsList = inscriptionsList + list(inscriptions.values())
     for team in teamsList:
         athletes = Athlete.objects.filter(team=team['team_name_abbr'])
         athletesList = athletesList + list(athletes.values())
@@ -44,7 +48,6 @@ def saveCompetition(request):
     if request.method == "POST":
         data = request.body.decode('utf-8')
         received_json_data = json.loads(data)
-        logger.error(received_json_data)
         form = CompetitionForm(received_json_data)
         if form.is_valid():
             competition = form.save(commit=False)

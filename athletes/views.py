@@ -11,7 +11,7 @@ from django.http import HttpResponse
 logger = logging.getLogger(__name__)
 # Create your views here.
 
-def getAthletes():
+def getAthletes(request):
     qs = Athlete.objects.all()
     data = list(qs.values())
     return JsonResponse(data, safe=False)

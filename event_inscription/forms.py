@@ -7,6 +7,5 @@ class EventInscriptionForm(forms.ModelForm):
         fields = [
             'event',
             'athlete',
-            'competition_name',
             'inscription_time',
         ]

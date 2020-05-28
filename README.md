@@ -1,5 +1,12 @@
 # swim-adm-backend
 
+#### Travis Status
+
+TODO
+
+#### Test Coverage
+
+TODO
 
 #### Logo
 

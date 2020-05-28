@@ -3,9 +3,13 @@
 ### RUN
 
 git clone git@github.com:guidopj/swim-adm-backend.git
+
 cd swim-adm-backend
+
 virtualenv test (recommended but not mandatory)
+
 pip install -r requirements.txt
+
 python manage.py runserver
 
 #### Travis Status

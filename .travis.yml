@@ -6,8 +6,6 @@ services: mysql
 install:
   - pip install -r requirements.txt
 # command to run tests
-before_script:
-  - mysql -u guidop -p root
 script:
   - coverage run manage.py test -v 2
   - coveralls

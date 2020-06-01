@@ -14,7 +14,7 @@ python manage.py runserver
 
 #### Travis Status
 
-TODO
+[![Build Status](https://travis-ci.com/guidopj/swim-adm-backend.svg?branch=master)](https://travis-ci.com/guidopj/swim-adm-backend)
 
 #### Test Coverage
 

@@ -18,7 +18,7 @@ python manage.py runserver
 
 #### Test Coverage
 
-TODO
+[![Coverage Status](https://coveralls.io/repos/github/guidopj/swim-adm-backend/badge.svg?branch=master)](https://coveralls.io/github/guidopj/swim-adm-backend?branch=master)
 
 #### Logo
 

@@ -9,7 +9,7 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 before_script:
-  - mysql -u root --password="" >> test/travis.sql
+  - mysql -u root --password="" >> logs/travis.sql
 script:
   - coverage run manage.py test -v 2
   - coveralls

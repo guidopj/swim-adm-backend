@@ -1,5 +1,24 @@
 # swim-adm-backend
 
+### RUN
+
+git clone git@github.com:guidopj/swim-adm-backend.git
+
+cd swim-adm-backend
+
+virtualenv test (recommended but not mandatory)
+
+pip install -r requirements.txt
+
+python manage.py runserver
+
+#### Travis Status
+
+[![Build Status](https://travis-ci.com/guidopj/swim-adm-backend.svg?branch=master)](https://travis-ci.com/guidopj/swim-adm-backend)
+
+#### Test Coverage
+
+TODO
 
 #### Logo
 

@@ -19,10 +19,10 @@ def getAthletes(request):
 @csrf_exempt
 def saveAthlete(request):
     if request.method == "POST":
-        data = request.body.decode('utf-8')
-        received_json_data = json.loads(data)
-        logger.error(received_json_data)
-        form = AthleteForm(received_json_data)
+        logger.error (request.body)
+        received_json_data = json.loads(request.body)
+        logger.error (received_json_data)
+        form = AthleteForm(received_json_data[0])
         if form.is_valid():
             athlete = form.save(commit=False)
             athlete.save()

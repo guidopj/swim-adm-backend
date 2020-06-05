@@ -9,4 +9,4 @@ class Athlete(models.Model):
     surname = models.CharField(max_length=200)
     date_of_birth = models.DateField()
     genre = models.CharField(max_length=11)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, default = "No Team")

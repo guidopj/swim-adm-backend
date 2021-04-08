@@ -1,4 +1,4 @@
-Django==2.2.10
+Django==2.2.20
 dnspython==1.16.0
 mysql-connector-python==8.0.19
 mysqlclient==1.4.6

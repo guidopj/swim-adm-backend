@@ -6,7 +6,7 @@ protobuf==3.6.1
 PyMySQL==0.9.3
 pytz==2019.1
 six==1.14.0
-sqlparse==0.3.0
+sqlparse==0.4.4
 virtualenv==16.5.0
 coverage==5.1
 coveralls==2.0.0
